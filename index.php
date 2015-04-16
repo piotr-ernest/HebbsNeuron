@@ -58,7 +58,7 @@ $title = 'Sieci neuronowe';
                                 <label for="number_indexes">Podaj liczbę indeksów wektora wejściowego:</label>
                                 <input name="number_indexes" type="text" class="form-control" id="number_indexes" required="" autocomplete="off">
                             </div>
-
+                            
 
                             <button type="submit" class="btn btn-default">Zatwierdź</button>
                         </form>
