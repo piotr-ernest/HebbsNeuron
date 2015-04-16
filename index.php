@@ -33,7 +33,10 @@ $title = 'Sieci neuronowe';
                 <?php endif; ?>
 
                 <div id="header" class="row">
-                    <div class="col-sm-4 col-sm-offset-4"><h2>Model neuronu Hebba</h2></div>
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <h2>Model neuronu Hebba</h2>
+                        <p>Wartości z <span style="color: #cc0000;">*</span> są wymagane.</p>
+                    </div>
                 </div>
 
 
@@ -51,11 +54,11 @@ $title = 'Sieci neuronowe';
                     <div class="col-sm-4 col-sm-offset-4">
                         <form role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                             <div class="form-group">
-                                <label for="number_x">Podaj liczbę wektorów wejściowych:</label>
+                                <label for="number_x"><span style="color: #cc0000;">*</span>Podaj liczbę wektorów wejściowych:</label>
                                 <input name="number_x" type="text" class="form-control" id="number_x" required="" autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <label for="number_indexes">Podaj liczbę indeksów wektora wejściowego:</label>
+                                <label for="number_indexes"><span style="color: #cc0000;">*</span>Podaj liczbę indeksów wektora wejściowego:</label>
                                 <input name="number_indexes" type="text" class="form-control" id="number_indexes" required="" autocomplete="off">
                             </div>
 
@@ -107,7 +110,7 @@ $title = 'Sieci neuronowe';
 
                                 <div class="row">
                                     <?php for ($i = 0; $i < $number_x; $i++): ?>
-                                        <div class="col-sm-3">
+                                    <div class="col-sm-3" style="margin-bottom: 40px;">
                                             <label for="x<?php echo '' . ($i + 1); ?>"><span style="color: #cc0000;">*</span>Wektor <?php echo 'x' . ($i + 1); ?></label>
                                             <?php for ($j = 0; $j < $number_indexes; $j++): ?>
                                                 <input name="<?php echo 'x' . ($i + 1) . '_' . ($j + 1); ?>" type="text" class="form-control" required="" autocomplete="off">
