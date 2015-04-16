@@ -22,6 +22,8 @@ if (isset($_POST['vectors'])) {
     unset($_POST['count']);
     $x0 = $_POST['x0'];
     unset($_POST['x0']);
+    $function = $_POST['function'];
+    unset($_POST['function']);
 
     $rowData = array_map(function($elem){
         $res = htmlspecialchars(trim($elem));
@@ -31,7 +33,8 @@ if (isset($_POST['vectors'])) {
     $arrays = array_chunk($rowData, $count, true);
     
     $hebb = new Hebb();
-
+    $hebb->setFunctionType($function);
+    
     if (!empty($const_learn)) {
         $hebb->setConstantLearning($const_learn);
     }

@@ -23,13 +23,13 @@ $title = 'Sieci neuronowe';
         <div class="container-fluid">
 
             <div class="container">
-                
-                <?php if(isset($_GET['error'])): ?>
-                <div class="row">
-                    <div class="col-sm-4 col-sm-offset-4">
-                        <h1 style="color: red;">Wpisuj tylko wartości liczbowe.</h1>
+
+                <?php if (isset($_GET['error'])): ?>
+                    <div class="row">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <h1 style="color: red;">Wpisuj tylko wartości liczbowe.</h1>
+                        </div>
                     </div>
-                </div>
                 <?php endif; ?>
 
                 <div id="header" class="row">
@@ -58,7 +58,7 @@ $title = 'Sieci neuronowe';
                                 <label for="number_indexes">Podaj liczbę indeksów wektora wejściowego:</label>
                                 <input name="number_indexes" type="text" class="form-control" id="number_indexes" required="" autocomplete="off">
                             </div>
-                            
+
 
                             <button type="submit" class="btn btn-default">Zatwierdź</button>
                         </form>
@@ -116,6 +116,17 @@ $title = 'Sieci neuronowe';
                                         </div>
                                     <?php endfor; ?>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-sm-4 col-sm-offset-4">
+                                        <label for="function">Wybierz funkcję aktywacji:</label>
+                                        <select class="form-control" name="function" id="function">
+                                            <option value="signum">Funkcja signum</option>
+                                            <option value="sigmoidal">Funkcja sigmoidalna bipolarna</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-5" style="margin-top: 20px;">
                                         <div class="form-group"> 
@@ -159,7 +170,7 @@ $title = 'Sieci neuronowe';
             <script>
 
                 $(document).ready(function () {
-                    
+
                     function ModalWindow(settings)
                     {
                         var css = {

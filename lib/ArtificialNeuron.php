@@ -32,6 +32,7 @@ abstract class ArtificialNeuron
      * wartość progowa
      */
     protected $thresholdValue = false;
+    protected $functionType;
 
     /*
      * konstruktor klasy
@@ -117,6 +118,16 @@ abstract class ArtificialNeuron
         return $this->scales;
     }
 
+    public function setFunctionType($type)
+    {
+        $this->functionType = $type;
+    }
+
+    public function getFunctionType()
+    {
+        return $this->functionType;
+    }
+
     /*
      * blok sumujący
      * mnoży odpowiednie elementy
@@ -163,24 +174,8 @@ abstract class ArtificialNeuron
             $counter++;
 
             $sum = $this->aggregateBox($input['value'], $this->getScales());
-            
-            $signum = function($x) {
-                if (!is_numeric($x)) {
-                    throw new Exception('Podany argument musi być liczbą.');
-                }
-
-                if ($x < 0) {
-                    return -1;
-                }
-                if ($x == 0) {
-                    return 0;
-                }
-                if ($x > 0) {
-                    return 1;
-                }
-            };
-            
-            $y = $this->activationFunction($signum, $sum);
+            $function = $this->resolveFunctionType();
+            $y = $this->activationFunction($function, $sum);
             $this->setOutput($y);
             $output[] = $this->getOutput();
 
@@ -202,6 +197,45 @@ abstract class ArtificialNeuron
     public static function getSummarize()
     {
         return self::$summarize;
+    }
+
+    protected function resolveFunctionType()
+    {
+        $functionType = $this->getFunctionType();
+
+        switch ($functionType) {
+            case 'signum':
+                return function($x) {
+                    if (!is_numeric($x)) {
+                        throw new Exception('Podany argument musi być liczbą.');
+                    }
+
+                    if ($x < 0) {
+                        return -1;
+                    }
+                    if ($x == 0) {
+                        return 0;
+                    }
+                    if ($x > 0) {
+                        return 1;
+                    }
+                };
+
+                break;
+            case 'sigmoidal' :
+
+                return function($x) {
+                    if (!is_numeric($x)) {
+                        throw new Exception('Podany argument musi być liczbą.');
+                    }
+                    return ((2 / (1 + exp(-$x))) - 1);
+                };
+
+                break;
+            default:
+                throw new Exception('Niewłaściwa funkcja aktywacji.');
+                break;
+        }
     }
 
     /*
